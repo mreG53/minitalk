@@ -1,0 +1,18 @@
+void	ft_sendbit(int pid, char *av)
+{
+	int	i;
+
+	while (*av)
+	{
+		i = 8;
+		while (--i)
+		{
+			if ((*av << i) & 128)
+				kill(pid, SIGUSR1);
+			else
+				kill(pid, SIGUSR2);
+			usleep(1000);
+		}
+		av++;
+	}
+}
